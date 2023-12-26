@@ -1,0 +1,119 @@
+{{ define "main" }}
+<header id="index-header">
+{{- partial "header.html" . -}}
+</header>
+
+<!-- Start Cover -->
+{{- with .Site.GetPage "cover" }}
+<section class="section-block" id="home">
+  <div class="bg-slides-container">
+    {{- range .Params.slider_images }}
+    <div class="slider"><img class="img-fluid" src="{{ . | absURL }}" alt="slider-background"></div>
+    {{- end }}
+  </div>
+  <div class="text-container">
+    <h1>{{ .Title | markdownify | emojify }}</h1>
+    <h3>{{ .Params.subtitle | markdownify | emojify }}</h3>
+    <div>
+      <p>{{ .Content | markdownify | emojify }}</p>
+    </div>
+  </div>
+</section>
+{{- end }}
+<!-- End Header -->
+
+<!-- Start Introduction -->
+{{- with .Site.GetPage "introduction" }}
+<section class="section-block" id="introduction">
+  <div class="text-container">
+    <h1>{{ .Title | markdownify | emojify }}</h1>
+    <div class="content">
+      <p>{{ .Content | markdownify | emojify | safeHTML }}</p>
+    </div>
+  </div>
+</section>
+{{- end }}
+<!-- End Introduction -->
+
+<!-- Start Vision statement -->
+{{- with .Site.GetPage "vision" }}
+<section class="section-block" id="vision">
+  <div class="text-container">
+    <h1>{{ .Title | markdownify }}</h1>
+    <div class="content">
+      <p>{{ .Content | markdownify | emojify | safeHTML }}</p>
+    </div>
+  </div>
+</section>
+{{- end }}
+<!-- End Vision statement -->
+
+<!-- Start Cases -->
+{{- with .Site.GetPage "cases"}}
+<section class="section-block" id="cases">
+  <div class="grid-container">
+    <h1>{{ .Title | markdownify | emojify }}</h1>
+    <div class="real-grid-container">
+      {{- range first 6 .Data.Pages }}
+      <div class="grid-item">
+        <div class="item-background">
+          <img src="{{ .Params.image | absURL }}" alt="{{ .Title | markdownify }}">
+        </div>
+        <a href="{{.Permalink}}" class="item-caption display-blk">
+          <h2>{{ .Title | markdownify | emojify }}</h2>
+          <p>{{ .Summary }}</p>
+          {{- if .Date }}
+          <div class="meta">{{ .Date | time.Format (default "January 2, 2006" .Site.Params.date_format) }}</div>
+          {{- end }}
+        </a>
+      </div>
+      {{- end }}
+    </div>
+    {{- if gt (len .Data.Pages) 6}}
+    <div>
+      <a href="{{`cases` | absURL}}" class="button">{{ i18n "See More" . }}</a>
+    </div>
+    {{- end }}
+  </div>
+</section>
+{{- end }}
+<!-- End Cases -->
+
+<!-- Start Team -->
+{{- with .Site.GetPage "team"}}
+<section class="section-block" id="team">
+  <div class="grid-container">
+    <h1>{{ .Title | markdownify | emojify }}</h1>
+    <div class="real-grid-container">
+      {{- range .Params.member }}
+      <div class="grid-item">
+        <img src="{{ .avatar | absURL }}" alt="{{ .name }}">
+        <h2>{{ .name }}</h2>
+        <h3>{{ .designation }}</h3>
+        <p>{{ .bio | markdownify | emojify }}</p>
+      </div>
+      {{- end }}
+    </div>
+  </div>
+</section>
+{{- end }}
+<!-- End Team -->
+
+<!-- Start Join us -->
+{{- with .Site.GetPage "join-us" }}
+<section class="section-block" id="join-us">
+  <div class="text-container">
+    <h1>{{ .Title | markdownify }}</h1>
+    <div class="content">
+      <p>{{ .Content | markdownify | emojify | safeHTML }}</p>
+    </div>
+  </div>
+</section>
+{{- end }}
+<!-- End Join us -->
+
+
+
+<a href="#home"></a>
+
+{{ end }}

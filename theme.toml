@@ -1,0 +1,12 @@
+name = "cyberlimes"
+license = "MIT"
+licenselink = ""
+description = ""
+homepage = ""
+tags = []
+features = []
+min_version = "0.60.0"
+
+[author]
+  name = "Cyberlimes Co., Ltd"
+  homepage = "https://cyberlimes.com/"

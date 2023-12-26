@@ -1,0 +1,58 @@
+@import "_vars.scss";
+
+article {
+	padding-top: calc(var(--sat) + var(--head-menu-height) + 30px);
+	@media all and (min-width: $mobile-width + 200px) {
+		padding-top: calc(var(--sat) + var(--page-padding-top) + var(--head-menu-height) + 30px);
+	}
+
+	h1 {
+		text-align: center;
+		margin-top: 60px;
+	}
+	#meta-info {
+		text-align: center;
+	}
+
+	#article-body {
+		max-width: 1000px;
+		margin: 20px auto;
+	}
+
+	h2,h3,h4,h5,h6,h7,h8,h9 {
+		position: relative;
+		span.hline {
+			display: block;
+			.hanchor {
+				position: absolute;
+				top: 0;
+				left: -24px;
+				height: 100%;
+				width: 24px;
+				font-size: inherit;
+				display: inline-block;
+				transition: opacity 0.3s;
+				opacity: 0;
+				&:before {
+					content: '#';
+					position: absolute;
+					top: 0;
+					left: 0;
+					width: 24px;
+					height: 100%;
+					text-align: center;
+				}
+			}
+			&:hover {
+				.hanchor {
+					transition: opacity 0.3s;
+					opacity: 0.5;
+				}
+			}
+		}
+		a {
+			text-decoration: none;
+			color: inherit;
+		}
+	}
+}

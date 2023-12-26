@@ -1,0 +1,37 @@
+{{ define "title" }}
+  {{ with .Params.Title }}{{ . }} | {{ end }}{{ .Site.Title }}
+{{ end }}
+
+{{ define "main" }}
+<header id="page-header">
+{{- partial "header.html" . -}}
+</header>
+
+<article class='{{ if eq .Lang "zh" }}cjk{{ end }}'>
+  <h1>
+    {{- .Title -}}
+  </h1>
+  <div id="meta-info">
+    {{ with .Params.author | default .Site.Params.author }}
+    <p>
+      {{ $.Render "by" }}<strong>{{ . | markdownify }}</strong>
+    </p>
+    {{ end }}
+    {{/* Hugo uses Go's date formatting is set by example. Here are two formats */}}
+    <time {{ printf `datetime="%s"` (.Date.Format "2006-01-02T15:04:05Z07:00") | safeHTMLAttr }}>
+      {{- .Date | time.Format (default "January 2, 2006" .Site.Params.date_format) -}}
+    </time>
+  </div>
+  <div id="article-body">
+    <div>
+      {{- with .Content -}}
+      <div>
+        {{ . | replaceRE `(<h[1-9] id=\"([^\"]+)\"[^>]*>)(.+)(</h[1-9]>)` `${1}<span class="hline"><a href="#${2}" class="hanchor"></a>${3}</span>${4}` | safeHTML }}
+      </div>
+      {{- end -}}
+    </div>
+  </div>
+</article>
+
+<a href="#home"></a>
+{{ end }}

@@ -1,0 +1,22 @@
+{{/*
+  style/GetResource
+  Get a style asset stored at `/assets/css`
+
+  @author @regisphilibert
+  @author @cwittlut
+
+  @context String (.)
+
+  @access private
+
+  @returns Resource
+
+*/}}
+{{ $resource := dict }}
+{{ if ne . "" }}
+  {{ with resources.Get (printf "css/%s" .) }}
+    {{ $resource = . }}
+  {{ end }}
+{{ end }}
+
+{{ return $resource }}
